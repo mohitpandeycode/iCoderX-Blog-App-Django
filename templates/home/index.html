@@ -1,0 +1,42 @@
+{% extends 'basic.html' %}
+{% block homeactive %}
+  active
+{% endblock %}
+{% block title %}
+  Home-iCoder
+{% endblock %}
+{% block body %}
+  <div class="container my-3">
+    <div class="jumbotron">
+      <h1 class="display-4">Welcome To iCoder!</h1>
+      <p class="lead">
+        Welcome to our tech blog, where innovation meets insight! Dive into a world of cutting-edge technology, insightful reviews, and expert analysis. Whether you're a seasoned tech enthusiast or a curious beginner, our blog offers something for everyone.</p>
+      <hr class="my-4" />
+      <p>Explore the latest trends in artificial intelligence, cybersecurity, internet of things, and more. Stay ahead of the curve with in-depth tutorials, product comparisons, and industry news.</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="/blog" role="button">Go To Blog</a>
+      </p>
+    </div>
+  </div>
+  <div class="container">
+    <h2>Tranding BlogPosts:</h2>
+    {% for post in toppost  %}
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative my-3">
+      <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-success-emphasis">Blog By {{post.author}}<span> ({{post.views}} views)</span></strong> 
+        <h3 class="mb-0">{{post.title}}</h3>
+        <div class="mb-1 text-body-secondary">{{post.timeStamp}}</div>
+        <p class="mb-auto">{{post.content|slice:"0:300"}}</p>
+        <a href="/blog/{{post.slug}}" class="icon-link gap-1 icon-link-hover stretched-link">
+          Continue reading<svg class="bi">
+            <use xlink:href="#chevron-right"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="col-auto d-none d-lg-block">
+        <img style="border: 1px solid gray;"  src="media/{{post.image}}" width="200" height="250">
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

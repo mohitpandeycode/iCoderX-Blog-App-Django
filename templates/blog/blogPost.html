@@ -1,0 +1,88 @@
+{% extends 'basic.html' %}
+{% block title %}
+BlogPost
+{% endblock %}
+{% load extras %}
+{% block body %}
+{% load humanize %}
+<div class="container my-3">
+  <div class="col-auto d-none d-lg-block">
+    <img style="border: 1px solid gray;  box-shadow: 5px 10px 20px #888888; ;" align="right"
+      src="media/{{ post.image }}" width="400" height="400" />
+  </div>
+  <div class="col-md-8">
+    <h1 class="pb-4 mb-4 fst-italic border-bottom">{{ post.title }}</h1>
+    <p class="blog-post-meta">
+      {{ post.timeStamp }} by <a href="#">{{ post.author }}</a> <span>({{post.views}} views)</span>
+    </p>
+    <hr />
+    <p>{{ post.content }}</p>
+  </div>
+</div>
+<div class="container">
+  <h2>Comments - ({{ comments.count }})</h2>
+  {% if user.is_authenticated %}
+  <form action="/blog/postComment" method="post">
+    {% csrf_token %}
+    <input type="text" class="form-control col-md-4 mb-1" name="comment" required placeholder="Your Comment"
+      aria-describedby="button-addon2">
+    <input type="hidden" name="postSno" value="{{post.sno}}">
+    <input type="hidden" name="parentSno" value="">
+    <button class="btn btn-outline-info mb-3" type="submit" value="submit">Comment</button>
+  </form>
+  {% else %}
+  <div class="alert alert-warning col-md-4" role="alert">
+    Make sure to login to post comments...
+    <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#loginModal">Log
+      In</button>
+  </div>
+  {% endif %}
+  {% for comment in comments %}
+  <div class="row mb-2">
+    <div class="card" style="width: 30rem;">
+      <div class="card-body">
+        <h3 class="card-title"><img class="border border-dark p-1 mr-1 " width="30" class="mr-2"
+            src="/static/img/user.png"><u>{{ comment.user.username}}</u>
+          <span class="badge fs-6 bg-secondary">{{comment.timestamp | naturaltime }}</span>
+        </h3>
+        <p class="card-text">{{comment.comment}}</p>
+        <p class="d-inline-flex gap-1">
+          <button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse"
+            data-bs-target="#reply{{comment.id}}" aria-expanded="false" aria-controls="reply{{comment.sno}}">
+            Reply
+          </button>
+        </p>
+        <div class="collapse" id="reply{{comment.id}}">
+          <div class="card card-body">
+            {% if user.is_authenticated %}
+            <form action="/blog/postComment" method="post">
+              {% csrf_token %}
+              <input type="text" class="form-control mb-1" name="comment" required placeholder="Your Reply.."
+                aria-describedby="button-addon2">
+              <input type="hidden" name="parentSno" value="{{comment.id}}">
+              <input type="hidden" name="postSno" value="{{post.sno}}">
+              <button class="btn btn-outline-info" type="submit" value="submit">Reply</button>
+            </form>
+            {% else %}
+            <h4>Login to post replies..!</h4>
+            <hr>
+            {% endif %}
+            <div class="replies my-2 ">
+              <h5>Top Replies..</h5>
+              {% for reply in replyDict|get_val:comment.id %}
+              <div class="border p-2">
+                <h4 class="card-title"><img class="border border-dark p-1 mr-1 " width="30" class="mr-2"
+                    src="/static/img/user.png"><u>{{ reply.user.username}}</u></h4><span>{{reply.timestamp | naturaltime
+                  }}</span>
+                <p class="card-text">{{reply.comment}}</p>
+              </div>
+              <br>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endblock %}
