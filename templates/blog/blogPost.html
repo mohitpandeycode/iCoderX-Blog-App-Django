@@ -72,8 +72,7 @@ BlogPost
               {% for reply in replyDict|get_val:comment.id %}
               <div class="border p-2">
                 <h4 class="card-title"><img class="border border-dark p-1 mr-1 " width="30" class="mr-2"
-                    src="/static/img/user.png"><u>{{ reply.user.username}}</u></h4><span>{{reply.timestamp | naturaltime
-                  }}</span>
+                    src="/static/img/user.png"><u>{{ reply.user.username}}</u></h4><span>{{reply.timestamp | naturaltime}}</span>
                 <p class="card-text">{{reply.comment}}</p>
               </div>
               <br>

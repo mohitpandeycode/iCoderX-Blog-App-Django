@@ -1,4 +1,38 @@
-{% extends "basic.html" %}
-{% block aboutactive %}active{%endblock%} 
-{% block title %} About Us {% endblock %}
-{% block body %}About Us{% endblock %}
+{% extends 'basic.html' %}
+{% block aboutactive %}
+  active
+{% endblock %}
+{% block title %}
+  About Us
+{% endblock %}
+<!-- CSS Files -->
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/abouts/about-4/assets/css/about-4.css" />
+{% block body %}
+  <!-- About 4 - Bootstrap Brain Component -->
+
+  <section class="py-3 py-md-5 py-xl-8">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h3 class="fs-5 mb-2 text-secondary">About-Welcome to iCoder's</h3>
+          <h2 class="display-5 mb-4">Join us on this exhilarating journey through the ever-evolving landscape of technology. Whether you're looking for practical advice, thought-provoking insights, or simply a dose of tech-inspired inspiration, TechSweat is your trusted companion in navigating the digital age. Let's break a sweat together as we explore the fascinating intersection of technology and humanity.
+          </h2>
+          <button type="button" class="btn btn-lg btn-primary mb-3 mb-md-4 mb-xl-5">Connect Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+       <h3> Welcome to iCoder!!</h3>
+
+At TechSweat, we're passionate about merging the world of technology with the pulse of everyday life. Our platform is your go-to destination for all things tech-related, delivered with a personal touch and a sprinkle of enthusiasm.
+
+We understand that technology isn't just about gadgets and gizmos; it's about how these innovations shape and enhance our daily experiences. Whether you're a tech aficionado, a casual user, or simply curious about the latest trends, we've got you covered.
+
+From in-depth product reviews and comparisons to thought-provoking analysis pieces and how-to guides, our dedicated team of tech enthusiasts is committed to providing you with insightful and engaging content. We delve into topics ranging from the latest smartphone releases and cutting-edge AI advancements to cybersecurity tips and the impact of technology on society.
+
+But we're not just here to inform; we're here to inspire. We believe that technology has the power to empower and transform lives, and we're excited to share stories of innovation and ingenuity that push the boundaries of what's possible.
+    </div>
+  </section>
+{% endblock %}

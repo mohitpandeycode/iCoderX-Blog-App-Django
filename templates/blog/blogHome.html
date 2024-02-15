@@ -5,6 +5,7 @@
 {% block title %}
   BlogHome
 {% endblock %}
+
 {% block body %}
 
   <div class="container my-3">
@@ -12,7 +13,7 @@
     {% for post in allPost %}
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative my-3">
       <div class="col p-4 d-flex flex-column position-static">
-        <strong class="d-inline-block mb-2 text-success-emphasis">Blog By {{post.author}}  <span>({{post.views}} views)</span></strong>
+        <strong class="d-inline-block mb-2 text-emphasis">Blog By {{post.author}}  <span>({{post.views}} views)</span></strong>
         <h3 class="mb-0">{{post.title}}</h3>
         <div class="mb-1 text-body-secondary">Publish on:- {{post.timeStamp}}</div>
         <p class="mb-auto">{{post.content|truncatechars:300}}</p>
@@ -23,7 +24,7 @@
         </a>
       </div>
       <div class="col-auto d-none d-lg-block">
-        <img style="border: 1px solid gray;"  src="media/{{post.image}}" width="200" height="250">
+        <img style="border: 1px solid gray;"  src="media/{{post.image}}" width="350" height="250">
       </div>
     </div>
     {% endfor %}
